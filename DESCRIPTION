@@ -1,0 +1,17 @@
+Package: R10Xtools
+Title: Helper functions for dealing with 10X single-cell RNAseq data
+Version: 0.0.0.9000
+Authors@R: person("Matthew", "Dufort", email = "matt.dufort@gmail.com", role = c("aut", "cre"))
+Description: This package includes functions to assist with quality control and
+	analysis of 10X single-cell RNAseq data. It is being built up over time, with
+	functions added as their need is identified.
+Imports:
+    ggplot2,
+    dplyr,
+Depends:
+    R (>= 3.2.2)
+Suggests:
+    annotables
+License: GPL-3
+LazyData: true
+RoxygenNote: 6.0.1

@@ -14,7 +14,6 @@
 #' @param min_counts the minimum number of counts for a UMI/gene to be counted as detected. UMIs/genes with sample counts >= this value are considered detected. Defaults to 1. Set to NULL to use min_cpm.
 #' @param min_cpm the minimum counts per million for a UMI/gene to be counted as detected. UMIs/genes with sample counts >= this value are considered detected. Either this or min_count should be specified, but not both; including both yields an error. Defaults to NULL.
 #' @param verbose logical, whether to output the status of the estimation.
-#' @import countSubsetNorm
 #' @export
 #' @details The \code{method} parameter determines the approach used to estimate the number of UMIs or genes detected at different read depths. Method "division" simply divides the counts for each UMI/gene by a series of scaling factors, then counts the genes whose adjusted counts exceed the detection threshold. Method "sampling" generates a number of sets (\code{nreps}) of simulated counts for each library at each sequencing depth, by probabilistically simulating counts using observed proportions. It then counts the number of genes that meet the detection threshold in each simulation, and takes the arithmetic mean of the values for each library at each depth.
 #' @return A data frame containing \code{nreps} rows for each depth, with one row for each sample at each depth. Columns include "sample" (the name of the sample identifier), "depth" (the depth value for that iteration), and "sat" (the number of genes or UMIs detected at that depth for that sample).  For method "sampling", it includes an additional column with the variance of genes detected across all replicates of each sample at each depth.
@@ -41,7 +40,7 @@ estimate_10X_saturation <-
     # for now, it needs to be subset to a single sample before feeding into this function
     # this would require a bunch of tweaks
     # if I want to do that, check out my estimate_saturation function for help
-    molecule_info <- as.data.table(molecule_info)
+    molecule_info <- data.table::as.data.table(molecule_info)
     molecule_info$reads <- as.numeric(molecule_info$reads) # easier to manage if I convert to numeric
     
     
